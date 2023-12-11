@@ -2,6 +2,7 @@ import { getAnimeResponse } from '@/app/libs/api-libs'
 import Image from 'next/image'
 import React from 'react'
 import VideoPlayer from '@/components/Utilities/VideoPlayer'
+
 async function page({params : {id}}) {
     const anime = await getAnimeResponse(`anime/${id}`, )
   return (
@@ -43,7 +44,7 @@ async function page({params : {id}}) {
         </div>
       </div>
       <div>
-        <VideoPlayer/>
+        <VideoPlayer youtubeId={anime.data.trailer.youtube_id}/>
       </div>
     </>
   );

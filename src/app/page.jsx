@@ -1,4 +1,3 @@
-import axios from "axios";
 import AnimeList from "@/components/AnimeList";
 import Header from "@/components/AnimeList/Header";
 import { getAnimeResponse } from "./libs/api-libs";

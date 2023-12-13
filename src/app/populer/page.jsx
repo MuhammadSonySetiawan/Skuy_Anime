@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import HeaderMenu from '@/components/Utilities/HeaderMenu';
 import Paginetion from '@/components/Utilities/Paginetion';
 import AnimeList from '@/components/AnimeList';
-import { getAnimeResponse } from '../libs/api-libs';
+import { getAnimeResponse } from '../../libs/api-libs';
 
 function page () {
   const [page, setPage] =useState(1)

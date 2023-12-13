@@ -11,7 +11,7 @@ function InputSearch() {
   const hendleSearch = (event) =>{
     const keyword = searchRef.current.value;
     
-    if(!keyword) return
+    if(!keyword || keyword.trim() == "") return
 
     if(event.key === "Enter" || event.type === "click"){
       event.preventDefault()

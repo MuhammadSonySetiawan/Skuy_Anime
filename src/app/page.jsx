@@ -1,9 +1,14 @@
 import AnimeList from "@/components/AnimeList";
 import Header from "@/components/AnimeList/Header";
-import { getAnimeResponse } from "./libs/api-libs";
+import { getAnimeResponse, getNestedAnimeResponse, reproduce } from "../libs/api-libs";
 
 export default async function Home ()  {
   const topAnime = await getAnimeResponse("top/anime", "limit=8");
+
+  let recommendedAnime = await getNestedAnimeResponse(
+    "recommendations/anime", "entry"
+  );
+  recommendedAnime = reproduce(recommendedAnime, 4)
 
   return (
     <div>
@@ -17,16 +22,15 @@ export default async function Home ()  {
         <AnimeList api={topAnime} />
       </section>
 
-      {/* Anime terbaru */}
+      {/* Anime Recomendasi */}
       <section>
         <Header
-          title="Paling bBaru"
+          title="Rekomendasi"
           linkHref="/new"
           linkTitle="Ikuti Sekarang"
         />
-        <AnimeList api={topAnime} />
+        <AnimeList api={recommendedAnime} />
       </section>
-
     </div>
   );
 }

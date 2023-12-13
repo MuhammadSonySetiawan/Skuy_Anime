@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import InputSearch from './InputSearch';
-
+import UserActionButton from './UserActionButton';
 function Navbar() {
   return (
     <header className="bg-color-accent">
@@ -9,7 +9,8 @@ function Navbar() {
         <Link href="/" className="font-bold text-2xl">
           AnimeList
         </Link>
-        <InputSearch/>
+        <InputSearch />
+        <UserActionButton />
       </div>
     </header>
   );

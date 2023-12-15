@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link';
-import { authUserSession } from '@/libs/auth-lins';
+import { authUserSession } from '@/libs/auth-libs';
 
 async function UserActionButton() {
   const user = await authUserSession()

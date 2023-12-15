@@ -2,15 +2,32 @@ import { getAnimeResponse } from '@/libs/api-libs'
 import Image from 'next/image'
 import React from 'react'
 import VideoPlayer from '@/components/Utilities/VideoPlayer'
+import CollectionButton from '@/components/AnimeList/CollectionButton'
+import { authUserSession } from '@/libs/auth-libs'
+import prisma from '@/libs/prisma'
 
-async function page({params : {id}}) {
+async function page({ params : { id } }) {
     const anime = await getAnimeResponse(`anime/${id}`, )
+    const user = await authUserSession()
+    
+    const collection = await prisma.collection.findFirst({
+      where: 
+      {
+        user_email: user?.email,
+        anime_mal_id: id,
+      }
+    });
+    
   return (
     <>
       <div className="pt-4 px-4">
         <h3 className="text-2xl text-color-primary">
           {anime.data.title} - {anime.data.year}
         </h3>
+        {!collection && user && (
+          <CollectionButton anime_mal_id={id} user_email={user?.email} />
+        )}
+
         <div className="pt-4 px-4 flex gap-2 text-color-primary overflow-x-auto">
           <div className="w-36 flex flex-col justify-center items-center rounded border border-color-primary p-2">
             <h3>Peringkat</h3>
@@ -44,7 +61,7 @@ async function page({params : {id}}) {
         </div>
       </div>
       <div>
-        <VideoPlayer youtubeId={anime.data.trailer.youtube_id}/>
+        <VideoPlayer youtubeId={anime.data.trailer.youtube_id} />
       </div>
     </>
   );
